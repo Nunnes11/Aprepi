@@ -1,0 +1,20 @@
+{% extends 'siteAprepi/navbar.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>{{ conteudo.titulo }}</h1>
+    <div>
+        {% if conteudo %}
+            <p>{{ conteudo.conteudo|safe }}</p>
+            {% if conteudo.image %}
+                <img src="{{ conteudo.image.url }}" alt="Imagem História" class="img-fluid">
+            {% endif %}
+        {% else %}
+            <p>Nenhum conteúdo disponível.</p>
+        {% endif %}
+        {% if user.is_staff %}
+            <a href="{% url 'historia_editar' %}" class="btn btn-warning mt-3">Editar</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

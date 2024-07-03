@@ -1,0 +1,18 @@
+{% extends 'siteAprepi/navbar.html' %}
+
+{% block content %}
+<h2>Lista de Associados</h2>
+<ul>
+    {% for associado in associados %}
+        <li>
+            <a href="{% url 'detalhar_associado' associado.id %}">{{ associado.nome }}</a>
+            <a href="{% url 'atualizar_associado' associado.id %}">Editar</a>
+            <form action="{% url 'deletar_associado' associado.id %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Deletar</button>
+            </form>
+        </li>
+
+    {% endfor %}
+</ul>
+{% endblock %}

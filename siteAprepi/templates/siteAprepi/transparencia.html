@@ -1,0 +1,44 @@
+{% extends 'siteAprepi/navbar.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Transparência</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Documentos</h2>
+            <ul>
+                {% for documento in documentos_gerais %}
+                    <li>
+                        <a href="{{ documento.arquivo.url }}" target="_blank">{{ documento.titulo }}</a>
+                        {% if user.is_authenticated and user.is_superuser %}
+                            <a href="{% url 'editar_documento_geral' documento.id %}">Editar</a>
+                            <a href="{% url 'deletar_documento_geral' documento.id %}">Deletar</a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+            {% if user.is_authenticated and user.is_superuser %}
+                <a href="{% url 'documentos_gerais' %}" class="btn btn-primary">Inserir Documento</a>
+            {% endif %}
+        </div>
+        
+        <div class="col-md-6">
+            <h2>Atas</h2>
+            <ul>
+                {% for ata in atas_reunioes %}
+                    <li>
+                        <a href="{{ ata.arquivo.url }}" target="_blank">{{ ata.titulo }}</a>
+                        {% if user.is_authenticated and user.is_superuser %}
+                            <a href="{% url 'editar_ata_reuniao' ata.id %}">Editar</a>
+                            <a href="{% url 'deletar_ata_reuniao' ata.id %}">Deletar</a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+            {% if user.is_authenticated and user.is_superuser %}
+                <a href="{% url 'atas_reunioes' %}" class="btn btn-primary">Inserir Ata</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

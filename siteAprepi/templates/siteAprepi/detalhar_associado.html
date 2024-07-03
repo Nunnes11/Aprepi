@@ -1,0 +1,11 @@
+{% extends 'siteAprepi/navbar.html' %}
+
+{% block content %}
+<h2>Detalhes do Associado</h2>
+
+<p>Nome: {{ associado.nome }}</p>
+<p>Endereço: {{ associado.endereco }}</p>
+<p>Matrícula: {{ associado.matricula }}</p>
+<p>Email: {{ associado.email }}</p>
+<a href="{% url 'listar_associados' %}">Voltar para a lista</a>
+{% endblock %}

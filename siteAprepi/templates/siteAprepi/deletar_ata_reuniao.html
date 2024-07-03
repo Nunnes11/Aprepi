@@ -1,0 +1,13 @@
+{% extends 'siteAprepi/navbar.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Deletar Ata de Reunião</h2>
+    <p>Você tem certeza que deseja deletar a ata de reunião "{{ ata.titulo }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Deletar</button>
+        <a href="{% url 'transparencia' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

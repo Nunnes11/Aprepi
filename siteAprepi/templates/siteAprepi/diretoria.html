@@ -1,0 +1,26 @@
+{% extends 'siteAprepi/navbar.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Diretoria</h1>
+    <div>
+        {% if conteudo %}
+            {% if conteudo.imagem_diretoria %}
+                <img src="{{ conteudo.imagem_diretoria.url }}" alt="Imagem Diretoria" class="img-fluid">
+            {% endif %}
+            <p>{{ conteudo.descricao_diretoria|safe }}</p>
+
+            {% if conteudo.imagem_conselho_fiscal %}
+                <img src="{{ conteudo.imagem_conselho_fiscal.url }}" alt="Imagem Conselho Fiscal" class="img-fluid">
+            {% endif %}
+            <p>{{ conteudo.descricao_conselho_fiscal|safe }}</p>
+        {% else %}
+            <p>Nenhum conteúdo disponível.</p>
+        {% endif %}
+    </div>
+
+    {% if user.is_authenticated and user.is_superuser %}
+        <a href="{% url 'diretoria_editar' %}" class="btn btn-primary mt-3">Editar</a>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'siteAprepi/navbar.html' %}
+
+{% block content %}
+<h2>Lista de Usuários</h2>
+<ul>
+    {% for usuario in usuarios %}
+        <li>
+            <a href="{% url 'detalhar_usuario' usuario.id %}">{{ usuario.nome }}</a>
+            <a href="{% url 'atualizar_usuario' usuario.id %}">Editar</a>
+            <form action="{% url 'deletar_usuario' usuario.id %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Deletar</button>
+            </form>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

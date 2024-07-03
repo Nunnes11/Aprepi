@@ -1,0 +1,9 @@
+{% extends 'siteAprepi/navbar.html' %}
+
+{% block content %}
+<h2>Detalhes do Usuário</h2>
+<p>Nome: {{ usuario.nome }}</p>
+<p>Endereço: {{ usuario.endereco }}</p>
+<p>Email: {{ usuario.email }}</p>
+<a href="{% url 'listar_usuarios' %}">Voltar para a lista</a>
+{% endblock %}

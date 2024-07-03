@@ -1,0 +1,20 @@
+{% extends 'siteAprepi/navbar.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Quem Somos</h1>
+    <div>
+        {% if quem_somos_conteudo %}
+            <p>{{ quem_somos_conteudo.conteudo|safe }}</p>
+            {% if quem_somos_conteudo.image %}
+                <img src="{{ quem_somos_conteudo.image.url }}" alt="Imagem Quem Somos" class="img-fluid">
+            {% endif %}
+        {% else %}
+            <p>Nenhum conteúdo disponível.</p>
+        {% endif %}
+    </div>
+    {% if user.is_authenticated and user.is_superuser %}
+        <a href="{% url 'quem_somos_editar' %}" class="btn btn-primary mt-3">Editar</a>
+    {% endif %}
+</div>
+{% endblock %}
