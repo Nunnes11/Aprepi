@@ -77,3 +77,12 @@ class Usuario(models.Model):
     def __srt__(self):
         return self.nome
     
+
+class CarrosselNoticia(models.Model):
+    titulo = models.CharField(max_length=200)
+    resumo = models.TextField()
+    imagem = models.ImageField(upload_to='carrossel_imagens/')
+    data_publicacao = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.titulo

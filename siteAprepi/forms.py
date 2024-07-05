@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import QuemSomos, Historia, DocumentoGeral, AtaReuniao, Diretoria, Associado, Usuario
+from .models import QuemSomos, Historia, DocumentoGeral, AtaReuniao, Diretoria, Associado, Usuario, CarrosselNoticia
 
 # formulário para link APREPI
 
@@ -74,3 +74,11 @@ class UsuarioForm(forms.ModelForm):
         if commit:
             usuario.save()
         return usuario
+
+# CARROSSEL
+
+class CarrosselNoticiaForm(forms.ModelForm):
+    class Meta:
+        model = CarrosselNoticia
+        fields = ['titulo', 'resumo', 'imagem']
+

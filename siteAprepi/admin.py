@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import QuemSomos, Historia, DocumentoGeral, AtaReuniao, Diretoria
+from .models import QuemSomos, Historia, DocumentoGeral, AtaReuniao, Diretoria, CarrosselNoticia
 
 # NAVBAR
 # Link APREPI
@@ -29,5 +29,13 @@ class AtaReuniaoAdmin(admin.ModelAdmin):
 @admin.register(Diretoria)
 class DiretoriaAdmin(admin.ModelAdmin):
     list_display = ('titulo',)
+
+
+
+# CARROSSEL
+
+@admin.register(CarrosselNoticia)
+class CarrosselNoticiaAdmin(admin.ModelAdmin):
+    list_display = ('titulo', 'imagem')
 
 

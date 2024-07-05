@@ -3,12 +3,28 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
-from .forms import QuemSomosForm, HistoriaForm, DocumentoGeralForm, AtaReuniaoForm, DiretoriaForm, AssociadoForm, UsuarioForm
-from .models import QuemSomos, Historia, DocumentoGeral, AtaReuniao, Diretoria, Associado, Usuario
+from .forms import QuemSomosForm, HistoriaForm, DocumentoGeralForm, AtaReuniaoForm, DiretoriaForm, AssociadoForm, UsuarioForm, CarrosselNoticiaForm
+from .models import QuemSomos, Historia, DocumentoGeral, AtaReuniao, Diretoria, Associado, Usuario, CarrosselNoticia
 
 
 def home(request):
-    return render(request, 'siteAprepi/home.html')
+    carrossel_noticia = CarrosselNoticia.objects.all()[:3]
+    return render(request, 'siteAprepi/home.html', {'carrossel_noticia':carrossel_noticia})
+
+def is_admin(user):
+    return user.is_superuser
+
+
+
+def adicionar_carrossel_noticia(request):
+    if request.method == 'POST':
+        form = CarrosselNoticiaForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = CarrosselNoticiaForm()
+    return render(request, 'siteAprepi/adicionar_carrossel_noticia.html', {'form':form})
 
 
 # views para link APREPI
@@ -265,6 +281,8 @@ class LoginView(LoginView):
 
     def get_success_url(self):
         return reverse_lazy('home')
+
+
 
 
 
