@@ -78,6 +78,8 @@ class Usuario(models.Model):
         return self.nome
     
 
+# CARROSSEL
+
 class CarrosselNoticia(models.Model):
     titulo = models.CharField(max_length=200)
     resumo = models.TextField()
@@ -86,3 +88,26 @@ class CarrosselNoticia(models.Model):
 
     def __str__(self):
         return self.titulo
+    
+
+# PÁGINA PRINCIPAL (HOME)
+# Campo NOTÍCIAS RECENTES:
+
+class Noticia(models.Model):
+    CATEGORIA_CHOICES = [
+        ('PREVENCAO', 'Prevencao'),
+        ('IMPRENSA', 'Saiu na imprensa'),
+        ('ARTIGOS', 'Artigos'),
+        ('EVENTOS', 'Eventos'),
+    ]
+
+    titulo = models.CharField(max_length=200)
+    descricao = models.TextField()
+    conteudo = models.TextField()
+    imagem = models.ImageField(upload_to='noticias/')
+    data_publicacao = models.DateField(auto_now_add=True)
+    categoria = models.CharField(max_length=20, choices=CATEGORIA_CHOICES)
+
+    def __str__(self):
+        return self.titulo
+    

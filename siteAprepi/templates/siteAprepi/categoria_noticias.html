@@ -1,0 +1,19 @@
+{% extends 'siteAprepi/navbar.html' %}
+
+{% block content %}
+<h2>Notícias de {{ categoria }}</h2>
+<div class="row">
+    {% for noticia in noticias %}
+    <div class="col-md-3">
+        <div class="card mb-4">
+            <img src="{{ noticia.imagem.url }}" class="card-img-top" alt="{{ noticia.titulo }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ noticia.titulo }}</h5>
+                <p class="card-text">{{ noticia.descricao }}</p>
+                <a href="{% url 'noticia_detalhe' noticia.pk %}" class="btn btn-primary">Leia mais</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

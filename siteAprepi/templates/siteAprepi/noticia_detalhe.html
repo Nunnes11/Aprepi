@@ -1,0 +1,9 @@
+{% extends 'siteAprepi/navbar.html' %}
+
+{% block content %}
+<h2>{{ noticia.titulo }}</h2>
+<img src="{{ noticia.imagem.url }}" class="img-fluid" alt="{{ noticia.titulo }}">
+<p>{{ noticia.conteudo }}</p>
+<a href="{% url 'categoria_noticias' noticia.categoria %}" class="btn btn-secondary">Ver todas as notícias de {{ noticia.get_categoria_display }}</a>
+<a href="{% url 'home' %}" class="btn btn-primary">Voltar à página inicial</a>
+{% endblock %}

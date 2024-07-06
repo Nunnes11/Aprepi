@@ -4,18 +4,23 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from .forms import QuemSomosForm, HistoriaForm, DocumentoGeralForm, AtaReuniaoForm, DiretoriaForm, AssociadoForm, UsuarioForm, CarrosselNoticiaForm
-from .models import QuemSomos, Historia, DocumentoGeral, AtaReuniao, Diretoria, Associado, Usuario, CarrosselNoticia
+from .models import QuemSomos, Historia, DocumentoGeral, AtaReuniao, Diretoria, Associado, Usuario, CarrosselNoticia, Noticia
 
 
 def home(request):
     carrossel_noticia = CarrosselNoticia.objects.all()[:3]
-    return render(request, 'siteAprepi/home.html', {'carrossel_noticia':carrossel_noticia})
+    noticias_recentes = Noticia.objects.order_by('-data_publicacao')[:4]
+    return render(request, 'siteAprepi/home.html', {
+        'carrossel_noticia': carrossel_noticia,
+        'noticias_recentes': noticias_recentes
+    })
 
 def is_admin(user):
     return user.is_superuser
 
 
-
+@login_required
+@user_passes_test(is_admin)
 def adicionar_carrossel_noticia(request):
     if request.method == 'POST':
         form = CarrosselNoticiaForm(request.POST, request.FILES)
@@ -282,8 +287,15 @@ class LoginView(LoginView):
     def get_success_url(self):
         return reverse_lazy('home')
 
+# PÁGINA PRINCIPAL
+# Campo NOTÍCIAS RECENTES:
 
+def noticia_detalhe(request, pk):
+    noticia = get_object_or_404(Noticia, pk=pk)
+    return render(request, 'siteAprepi/noticia_detalhe.html', {'noticia':noticia})
 
-
+def categoria_noticias(request, categoria):
+    noticias = Noticia.objects.filter(categoria=categoria).order_by('-data_publicacao')
+    return render(request, 'siteAprepi/categoria_noticias.html', {'noticias':noticias, 'categoria':categoria})
 
 

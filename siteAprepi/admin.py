@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import QuemSomos, Historia, DocumentoGeral, AtaReuniao, Diretoria, CarrosselNoticia
+from .models import QuemSomos, Historia, DocumentoGeral, AtaReuniao, Diretoria, CarrosselNoticia, Noticia
 
 # NAVBAR
 # Link APREPI
@@ -31,11 +31,19 @@ class DiretoriaAdmin(admin.ModelAdmin):
     list_display = ('titulo',)
 
 
-
 # CARROSSEL
 
 @admin.register(CarrosselNoticia)
 class CarrosselNoticiaAdmin(admin.ModelAdmin):
     list_display = ('titulo', 'imagem')
 
+
+# PÁGINA PRINCIPAL (HOME)
+# Campo NOTÍCIAS RECENTES:
+
+@admin.register(Noticia)
+class NoticiaAdmin(admin.ModelAdmin):
+    list_display = ('titulo', 'categoria', 'data_publicacao')
+    list_filter = ('categoria', 'data_publicacao')
+    search_fields = ('titulo', 'descricao', 'conteudo')
 

@@ -1,8 +1,32 @@
-.carousel {
-    width: 100%;
-    height: auto;
+.carousel-inner {
+    width: auto;
+    height: 100px;
 }
 
-.container-fluid {
-    padding: 0;
+# cards NOTÍCIAS RECENTES
+
+.card {
+    display: flex;
+    flex-direction: column;
 }
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-text {
+    flex-grow: 1;
+}
+
+.card .btn {
+    margin-top: auto;
+}
+
+.card-img-top {
+    width: 100% !important;
+    height: 200px !important;
+    object-fit: cover !important;
+}
+
