@@ -4,12 +4,12 @@
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'siteAprepi/css/style.css' %}">
 
-<div class="container-fluid px-0">
+<div class="container-fluid px-0" style="padding-top: 70px;">
     <div id="noticiasCarrossel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             {% for noticia in carrossel_noticia %}
             <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                <img src="{{ noticia.imagem.url }}" class="d-block w-100" alt="{{ noticia.titulo }}">
+                <img src="{{ noticia.imagem.url }}" class="d-block w-100" alt="{{ noticia.titulo }}" style="height: 100vh; object-fit: cover;">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>{{ noticia.titulo }}</h5>
                     <p>{{ noticia.resumo }}</p>
@@ -37,7 +37,7 @@
                 <img src="{{ noticia.imagem.url }}" class="card-img-top" alt="{{ noticia.titulo }}">
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title">{{ noticia.titulo }}</h5>
-                    <p class="card-text flex-grow-1">{{ noticia.descricao|truncatewords:20  }}</p>
+                    <p class="card-text flex-grow-1">{{ noticia.descricao|truncatewords:20 }}</p>
                     <a href="{% url 'noticia_detalhe' noticia.pk %}" class="btn btn-primary mt-auto">Leia mais</a>
                 </div>
             </div>
